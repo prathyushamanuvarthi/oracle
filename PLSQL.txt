@@ -1,0 +1,410 @@
+Declare
+    
+       name Varchar2(30);
+begin
+      dbms_output.put_line('hello world');
+end;
+/
+o/p:hello world.
+-------------------------------------
+Declare
+    
+       name Varchar2(30);
+begin
+select ename into name from emp where empno=7934;
+
+      dbms_output.put_line('hello Mr. '||name);
+end;
+/
+--------------------------------------
+Declare
+    
+       name Varchar2(30);id number(4,0);salary number(9,2);
+begin
+select ename,empno,sal into name,id,salary from emp where empno=7534;
+
+      dbms_output.put_line(name||'-'|| id||''|| salary);
+end;
+/
+----------------------------------------------------
+
+Declare
+    
+       name emp.ename%type ;id emp.empno%type ;salary emp.sal%type;
+begin
+select ename,empno,sal into name,id,salary from emp where empno=7534;
+
+      dbms_output.put_line(name|| id ||  salary);
+end;
+/
+-----------------------------------------------------
+IF-THEN condition:
+
+Declare
+num number(5):=10;
+begin 
+if num!=0 then
+dbms_output.put_line('positive number');
+end if; 
+end;
+/
+-----------------------------------------
+IF-ELSE:
+
+declare num number(5) :=9;
+begin 
+if mod(num,2)=0 then
+dbms_output.put_line('even number');
+else
+dbms_output.put_line('odd number');
+end if;
+end;
+/
+---------------------------------------------
+IF-ELSE-IF-ELSE:
+
+
+declare num number(5) :=9;
+begin 
+if mod(num,2)=0 then
+dbms_output.put_line('even number');
+elsif mod(num,2)=1 then 
+dbms_output.put_line('odd number');
+else
+dbms_output.put_line('not a vali number');
+end if;
+end;
+/
+---------------------------------
+declare marks number(5) :=90;
+begin 
+if marks<=100 and marks>=90 then
+dbms_output.put_line('grade A');
+elsif marks<90 and marks>=80 then
+dbms_output.put_line('grade B');
+elsif marks<80 and marks>=70 then 
+dbms_output.put_line('grade C');
+elsif marks<70 and marks>=60 then
+dbms_output.put_line('grade D');
+else 
+dbms_output.put_line('Not Qualified');
+end if;
+end;
+/
+------------------------------
+
+declare marks number(5) :=90;
+begin 
+CASE
+ when marks<=100 and marks>=90 then 
+dbms_output.put_line('grade A');
+ when marks<90 and marks>=80 then
+ dbms_output.put_line('grade B');
+when marks<80 and marks>=70 then 
+dbms_output.put_line('grade C');
+when marks<70 and marks>=60 then 
+dbms_output.put_line('grade D');
+WHEN MARKS<60 THEN 
+dbms_output.put_line('Not Qualified');
+
+END CASE;
+END;
+/
+
+--------------------------------------
+
+Declare
+month_name varchar2(20):=&month_name;
+ begin 
+case 
+when month_name='january' then 
+dbms_output.put_line('31 days');
+when month_name='febuary' then 
+dbms_output.put_line('28 days');
+when month_name='march' then 
+dbms_output.put_line('31 days');
+when month_name='april' then 
+dbms_output.put_line('30 days');
+when month_name='may' then 
+dbms_output.put_line('31 days');
+when month_name='june' then 
+dbms_output.put_line('30 days');
+when month_name='july' then 
+dbms_output.put_line('31 days');
+when month_name='august' then 
+dbms_output.put_line('31 days');
+when month_name='september' then 
+dbms_output.put_line('30 days');
+when month_name='october' then 
+dbms_output.put_line('31 days');
+when month_name='november' then 
+dbms_output.put_line('30 days');
+when month_name='december' then 
+dbms_output.put_line('31 days');
+end case;
+end;
+/
+
+-------------------------------------------
+LOOP:
+
+syntax:
+Loop 
+statement
+End loop; 
+
+declare 
+num number(5) :=1;
+
+begin 
+loop
+
+dbms_output.put_line(num);
+num:=num+1;
+exit when num=5;
+end loop;
+end;
+/ 
+--------------------------------
+
+WHILE:
+------
+syntax: 
+
+      while condition loop
+        statements;
+       end loop
+
+declare 
+    num number(5):=1;
+begin while num<=10 loop
+dbms_output.put_line(num);
+num:=num+1;
+end loop;
+end;
+/
+
+------------------------------------
+
+FOR:
+----
+
+syntax:
+
+          for index_var IN lower..upper loop
+                statements;
+                 END LOOP;
+
+begin
+for num in 1..10 loop
+dbms_output.put_line(num);
+end loop;
+end;
+/
+
+-----------
+begin
+for num in reverse 1..10 loop
+dbms_output.put_line(num);
+end loop;
+end;
+/
+=---------------------
+without reverse:
+
+declare num number(5):=10;
+begin 
+for i in 1..10 loop
+dbms_output.put_line(num);
+num:=num-1;
+end loop;
+end;
+/
+-------------------------------------
+
+PROCEDURE:
+---------
+
+create procedure print_hello is
+msg varchar2(30):= 'hello good morning';
+begin
+dbms_output.put_line(msg);
+end;
+/
+--------------------------- 
+create or replace procedure print_name_sal(id number) is
+name emp.ename%type;
+esal emp.sal%type;
+begin
+select ename,sal into name,esal from emp where empno=id;
+dbms_output.put_line(name|| ' ' ||esal);
+end;
+/
+----------------------------------
+create or replace procedure print_emp(id IN number,name OUT varchar2) is
+
+begin 
+select ename into name from emp where empno=id;
+dbms_output.put_line('hello Mr. '||name);
+end;
+/
+------------------------------------
+
+declare
+empname emp.ename%type;
+begin
+print_emp(7534,empname);
+dbms_output.put_line('Hello Mr.'|| empname);
+end;
+/
+------------------------------
+
+Functions:
+
+create or replace function print_msg return varchar2 is
+begin 
+/*return 'hello,siri';*/
+end;
+/
+
+declare
+msg varchar2(30);
+begin
+msg:= print_msg;
+dbms_output.put_line(msg);
+end;
+/
+
+----------------------------------------
+
+create or replace function print_sal(id In number,salary out number) return number is
+begin 
+select sal into salary from emp where empno=id;
+return salary;
+end;
+/
+declare
+salary emp.sal%type;
+begin
+salary:=print_sal(7534,salary);
+dbms_output.put_line(salary);
+end;
+/
+--------------------------------------------
+
+create or replace procedure print_vote( age in number) is
+begin
+if(age>18) then
+dbms_output.put_line('eligible to register');
+else
+dbms_output.put_line('Not eligible to register');
+end if;
+end;
+/
+or
+exec print_vote(12);
+o/p:not eligible to register.
+declare
+age number(3);
+begin 
+print_vote(12);
+end;
+/
+-------------------------------------------------
+
+Exception:
+
+create or replace procedure check_age(age number) is
+invalid_age_exception EXCEPTION;
+begin
+if(age<18) then
+raise invalid_age_exception;
+ end if;
+
+exception 
+when invalid_age_exception then
+dbms_output.put_line('try after' ||(18-age) || 'years');
+end;
+/
+------------------------------------------
+
+create or replace procedure print_emp_sal is
+esal number(9,2);
+begin
+select sal into esal from emp where empno=1234;
+dbms_output.put_line('salary:'||esal);
+end;
+/
+-----------------------------------
+
+create or replace procedure print_emp_sal is
+esal number(9,2);
+begin
+select sal into esal from emp where empno=1234;
+dbms_output.put_line('salary:'||esal);
+exception
+ when no_data_found then
+dbms_output.put_line('no data for'|| 1234);
+end;
+/
+-------------------------------------------------
+//dynamic input//
+
+create or replace procedure print_emp_sal(id number) is
+esal number(9,2);
+begin
+select sal into esal from emp where empno=id;
+dbms_output.put_line('salary:'||esal);
+exception
+ when no_data_found then
+dbms_output.put_line('no data for'|| id);
+end;
+/
+
+----------------------------------------------
+
+create or replace procedure add_age is
+begin
+execute immediate 'alter table emp add age number(3)';
+end;
+/
+--------------------------------------------
+create table salary_history(id number(5),name varchar2(30),previous_sal number(9,2),latest_sal number(9,2));
+
+create or replace trigger sal_trigger 
+
+before update of sal on emp
+for each row
+begin
+insert into salary_history values(:old.empno,:old.ename,:old.sal,:new.sal);
+
+end;
+/
+
+update emp set sal=5000 where empno=7534;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

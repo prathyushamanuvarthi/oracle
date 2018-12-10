@@ -1,0 +1,182 @@
+PRIMARY KEY:
+
+1. AT COLUMN LEVEL
+
+create table employee(id number(5) primary key,name varchar2(30), sal number(9,2));
+
+drop table employee;
+
+create table employee(id number(5) constraint id_pk primary key,name varchar2(30), sal number(9,2));
+
+// best practice to add constraint name for any constraint in the table.
+
+alter table employee drop constraint id_pk;//for dropping constraint
+
+insert into employee values(101, 'kyungsoo', 9000);
+
+insert into employee values(102, 'chanyeol', 8999);
+
+create table dept( id number(5), name varchar2(30), loc varchar2(30), eid number(5) constraint eid_fk references employee(id));// FOREIGN KEY
+
+//ON DELETE CASCADE
+
+create table dept( id number(5), name varchar2(30), loc varchar2(30), eid number(5) constraint eid_fk references employee(id) ON DELETE CASCADE);// FOREIGN KEY
+
+alter table dept add constraint did_pk primary key(id);
+
+INSERT INTO dept values(10,'java','hyderabad',101);
+
+INSERT INTO dept values(20,'pega','hyderabad',102);
+
+INSERT INTO dept values(30,'angular','pune',103);
+
+delete from employee where id=101;//show an exception pf child record found.
+------------------------------------------------------------------------------------
+2. AT TABLE LEVEL
+
+
+create table employee(id number(5),name varchar2(30), sal number(9,2),constraint id_pk primary key);
+----------------------------------------------------------------------------------------
+UNIQUE KEY:
+
+1. AT COLUMN LEVEL:
+
+alter table employee add constraint name_uk unique key(name);//after table declaration
+
+create table student(id number(5) unique);//table level
+------------------------------------------------------------------------------------------
+CHECK:
+
+alter table employee add constraint sal_check check (sal>7000);
+
+---------------------------------------------------------------------------------------
+NOT NULL:
+
+alter table employee modify name varhcar2(30) NOT NULL;
+
+---------------------------------------------------------------------
+SAVE POINT:
+
+
+INSERT INTO dept values(40,'react','hyderabad',101);
+
+savepoint a;
+
+INSERT INTO dept values(50,'accounts','mumbai',103);
+
+savepoint b;
+
+INSERT INTO dept values(60,'sales','hyderabad',102);
+
+savepoint c;
+---------------------------------------------------------------
+DCL:
+
+GRANT, REVOKE ETC.
+
+CREATE USER IN A SYSTEM :
+
+1.SYSTEM PRIVILIGES:
+->create user
+->create table
+->create session
+
+2.OBJECT PRIVILIGES:
+->alter
+->select
+->insert
+->update
+->delete
+
+CREATE USER:
+
+create user siri identified by Capgemini123;
+
+Grant select on dept to siri;
+
+Revoke select on dept from siri;
+
+--------------------------------------------
+
+Aggregate functions:
+
+MIN:
+select min(sal) from employee;
+
+MAX:
+
+select max(sal) from employee;
+
+AVG:
+
+select avg(sal)from employee;
+
+SUM:
+
+select sum(sal) from employee;
+
+COUNT:
+
+select Count(sal) from employee;
+
+//to print requied title use as 
+
+select max(sal) as maximum_salary from employee;
+-------------------------------------------------------
+CLAUSES:
+
+->WHERE
+
+->GROUP BY
+
+->HAVING
+
+->ORDER BY
+
+
+GROUP BY:
+
+select count(empno) as total_employees,deptno from emp group by deptno;
+
+select count(empno) as total_employees,deptno from emp group by deptno having count(empno)>2;//to apply condition along with aggregate functions
+---------------------------------------------------------------------------------------------------------
+
+JOINS:
+
+1)EQUI JOIN
+2)NON EQUI JOIN
+3)SELF JOIN
+4)NATURAL JOIN
+5)OUTER JOIN->LEFT OUTER, ->RIGHT OUTER
+
+1)EQUI JOIN:
+
+A type uses equals to write the records.
+
+select *from emp e, dept d where e.deptno=d.deptno;
+
+2)NON EQUI JOIN
+
+A type uses not equals to write the records.
+
+select *from emp e, dept d where e.deptno!=d.deptno;
+
+CARTISIAN JOIN:
+
+select *from emp,dept;
+
+->LEFT OUTER JOIN:
+
+select *from emp e left outer join dept d on e.deptno=d.deptno;
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+1.1
+
+1. select staff_number as name,design_code as designation rfom staff_master where
+
+ hiedate<'01-jan-2003' and salary between 12000 and 25000;
+
+2.select staff_code,staff_name,dept_code,extract(year from sysdate)-extract(year from hiredate) 
+
+from staff_master where extract(year from sysdate)-extract(year from hiredate) >=18 order by hiredate;
+
+3.select *from staff_master where mgr_code IS NULL;
+
+4.select *from bookmaster where book_pub_year between 2001 and 2004 and book_name like'%&%';
+
+select staff_name from staff_master where staff_name like '_';
+----------------------------------------------------------------------------
+2.1
+
+1.select staff_name,lpad(staff_sal,15,'$')staff_sal from staff_master;
+
+2.select student_name,to_char(dob,'montth-dd-yyyy') from staff_master where 
+
+trim(to_char(dob,'day'))='saturday'or  trim(to_char(dob,'day'))='sunday'; 
+
+3.select staff_name,round(months_between(sysdate,hiredate)) as months_worked 
+
+from staff_master order by months _worked;
+
+4.select *staff_master where (extract(date from hiredate))<=15 and
+
+ (to_char(extract (month from hiredqate)='December');
+
+5.select staff_name,staff_sal;
+
+case
+
+when sal>=5000 then 'grade A';
+when sal>=2500 and sal<5000 then 'grade B';
+when sal>=1000 and sal<2500 then 'grade C';
+when sal<500 then 'grade D';
+end as "Grades" from emp;
+
+6.select staff_name,hiredate,to_char(hireday,'day') as paydate from staff_master,order by to_char(hiredate-1,'fmd');
+
+7.select instr('mississippi','i',1,3); from dual;
+
+8.SELECT to_char(NEXT_DAY(LAST_DAY( SYSDATE ) - INTERVAL '7' DAY,'FRIDAY'),
+
+'ddthsp "of" month "," yyyy') as paydate from dual;
+
+9.select studentcode,student_name,decode(dname,20,'electrical',30,
+
+'electronics','others')departmentname from student_master;
+--------------------------------------------------------------------------------
+3.1
+
+1.select staff_name,dept_code,dept_name,sal from staff_master s, department d where s.deptno=d.deptno and sal>20000;
+
+2.select staff_code as staff#, staff_name as staff,d.Dept_name, Manger_number as mgr#, manager_name as manager from staff_master,
+
+dept_master where s.deptno=d.deptno;
+
+3.select std_code,std_name,book_code,book_name from std_master s, book_trans b where s.std_code=b.std_code and book_ret_date=sysdate;
+
+4.select staff_code,staff_name,design_code,dept_name,book_code,book_name

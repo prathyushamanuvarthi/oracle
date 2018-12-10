@@ -1,0 +1,155 @@
+
+CREATE TABLE products(id number(10), name varchar2(20), price number(7,3), mfg_date Date);
+
+desc products;
+
+---------------------------------------------------------------------------
+CREATE TABLE employee(id number(10), name varchar2(20), salary number(7,3), doj Date);
+desc employee;
+INSERT into employee values( 101, 'siri', '45.00', '19-sep-2018');
+SELECT *from employee;
+INSERT into employee values( 102, 'chinni', '450.00', '29-sep-2018');
+INSERT into employee values(&id, &name, &salary, &doj);--->for dynamic entry of data.
+
+INSERT INTO employee(id,name,salary) values( 105,'padma',250.00);
+---------------------------------------------------------------------------
+CREATE TABLE emp(id number(10), name varchar2(20), salary number(7,3), doj Date);
+
+INSERT into emp select *from employee;// for data backup
+
+
+---------------------------------------------------------------------------
+
+DDL:
+
+ALTER:
+
+-to add a new column:
+ 
+alter table employee add designation varchar2(10);
+
+-to increse the length of data type- use modify with alter
+
+alter table employee modify designation varchar2(10);
+
+-to drop a column:
+
+alter table employee drop column designation;
+------------------------------------------------------------------
+TRUNCATE:
+
+truncate table tablename;
+
+truncate table employee;
+
+to roll back or continue from where we left use delete or
+
+truncate table employee reuse storage;
+---------------------------------------------------------------
+RENAME:
+
+rename employee to employee_details;
+
+TO RENAME COLUMN:
+
+ALTER TABLE TABLE_NAME RENAME COLUMN old column to new column:
+--------------------------------------------------------------
+DROP:
+	
+drop table employee_details;
+--------------------------------------------------------------
+
+create table subjects( id number(5), maths number(5,2), science number(5,2),social number(5,2);
+
+alter table subjects add name varchar2(20);
+
+UPDATE:
+
+update subjects set name='siri' where id=11;
+
+update subjects set name='kyungsoo' where id=12;
+
+update subjects set name='chanyeol' where id=13;
+
+update subjects set name='baekyun' where id=14;
+
+alter table subjects add total number(5,2);
+
+update subjects set total=(maths+science+social);
+
+alter table subjects add average number(5,2);
+
+delete from subjects;// all records
+
+delete from subjects where id= 14; // will delete only selected
+
+-------------------------------------------------------------------
+SELECT:
+
+--select *from subjects;// for all
+
+--select id,total,average from subjects;//for 3 columns
+
+--select *from subjects where id=14;
+
+----------------------------------------------------
+LOGICAL OPERATORS:
+AND:
+select *from subjetcs where id!=11 and id!=14;
+
+OR:
+
+SELECT *from subjects where id=12 or id= 13;
+ 
+NOT:
+
+SELECT *from subjects where id=!12;
+-------------------------------------------------------
+MEMBERSHIP CONDITIONS:
+
+IN:
+SELECT *FROM subjects where id IN(10,14,15);
+
+"IN" OPERATOR IS SAME AS "=ANY" OPERATOR.
+-----------------------------------------------------
+NOT IN:
+
+SELECT *FROM subjects where id NOT IN(10,12,14,15);
+O/P: display id's 11 and 13.
+------------------------------------------------------
+LIKE:
+//name starts with s
+select *from subjects where name LIKE 's%';
+
+//name ends with d
+select *from subjetcs where name LIKE '%d';
+
+//name stats with s and ends with d
+select *from subjetcs where name LIKE 's%d';
+
+//name with anywhere 'a'
+select *from subjetcs where name LIKE '%a%';
+
+//a at second position
+select *from subjetcs where name LIKE '_a%';
+
+//a at second position from end
+select *from subjetcs where name LIKE '%a_';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
